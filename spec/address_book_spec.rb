@@ -1,4 +1,5 @@
  require_relative '../models/address_book'
+ require 'pry'
  
  RSpec.describe AddressBook do
   let(:book) { AddressBook.new }
@@ -92,7 +93,7 @@
          it "imports the correct number of entries" do
            book.import_from_csv("entries_2.csv")
            book_size = book.entries.size
-           expect(book_size).to eq 3
+           expect(book_size).to eq 4
          end
          it "imports the 1st entry second file" do
            book.import_from_csv("entries_2.csv")
@@ -109,8 +110,14 @@
           it "imports the 3rd entry second file" do
             book.import_from_csv("entries_2.csv")
             entry_three = book.entries[2]
-            check_entry(entry_three, "Raptor", "555-555-3660", "Raptor@blocmail.com")
+            check_entry(entry_three, "Missing Data", "414-332-1000", "Blank@blankmail.com")
           end
+          
+         it "imports the 4th entry second file" do
+            book.import_from_csv("entries_2.csv")
+            entry_four = book.entries[3]
+            check_entry(entry_four, "Raptor", "555-555-3660", "Raptor@blocmail.com")
+          end 
     end
     
     describe "#binary_search" do

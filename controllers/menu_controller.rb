@@ -99,6 +99,23 @@
    end
  
    def read_csv
+    print "Enter CSV file to import:"
+    file_name = gets.chomp
+    
+    if file_name.empty?
+     system "clear"
+     puts "No CSV file found"
+     main_menu
+    end
+    
+    begin
+      entry_count= address_book.import_from_csv(file_name).count
+      system "clear"
+      puts "#{entry_count} new entries from #{file_name}"
+     rescue
+      puts "#{file_name} is not a valid CSV file, please enter the name of a valid file"
+      read_csv
+    end
    end
    
    def display_entry

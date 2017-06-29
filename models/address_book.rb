@@ -1,5 +1,6 @@
  require_relative 'entry'
  require "csv"
+ require 'pry'
  
 class AddressBook
      attr_reader :entries
@@ -32,7 +33,7 @@ class AddressBook
      csv = CSV.parse(csv_text, headers: true, skip_blanks: true)
      csv.each do |row|
        row_hash = row.to_hash
-       add_entry(row_hash["name"], row_hash["phone_number"], row_hash["email"])
+       add_entry(row_hash["name"]||"Missing Data", row_hash["phone_number"]||"Missing Data", row_hash["email"]||"Missing Data")
      end
   end   
      
